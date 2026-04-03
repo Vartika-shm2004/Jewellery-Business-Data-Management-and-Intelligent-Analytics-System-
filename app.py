@@ -183,7 +183,7 @@ def plot_buyer_analysis(buyers):
 
 def main():
     st.markdown('<h1 class="main-header"> Jewellery Business Data Management & Analytics System</h1>', unsafe_allow_html=True)
-    st.markdown('<p style="text-align: center; color: #94a3b8;">Anshuman | Ambey Diamonds</p>', unsafe_allow_html=True)
+    st.markdown('<p style="text-align: center; color: #94a3b8;">Vartika Sharma</p>', unsafe_allow_html=True)
     
     with st.sidebar:
         st.header("Navigation")
