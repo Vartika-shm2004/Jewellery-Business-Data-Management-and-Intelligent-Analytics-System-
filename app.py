@@ -182,30 +182,30 @@ def plot_buyer_analysis(buyers):
     return fig
 
 def main():
-    st.markdown('<h1 class="main-header">💎 Jewellery Business Data Management & Analytics System</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header"> Jewellery Business Data Management & Analytics System</h1>', unsafe_allow_html=True)
     st.markdown('<p style="text-align: center; color: #94a3b8;">Anshuman | Ambey Diamonds</p>', unsafe_allow_html=True)
     
     with st.sidebar:
         st.header("Navigation")
         st.markdown("---")
-        if st.button("📊 Dashboard", use_container_width=True):
+        if st.button(" Dashboard", use_container_width=True):
             st.session_state['current_page'] = 'dashboard'
-        if st.button("📦 Inventory", use_container_width=True):
+        if st.button(" Inventory", use_container_width=True):
             st.session_state['current_page'] = 'inventory'
-        if st.button("👥 Suppliers", use_container_width=True):
+        if st.button(" Suppliers", use_container_width=True):
             st.session_state['current_page'] = 'suppliers'
-        if st.button("🛒 Buyers", use_container_width=True):
+        if st.button(" Buyers", use_container_width=True):
             st.session_state['current_page'] = 'buyers'
-        if st.button("💰 Sales", use_container_width=True):
+        if st.button(" Sales", use_container_width=True):
             st.session_state['current_page'] = 'sales'
-        if st.button("📈 Analytics", use_container_width=True):
+        if st.button(" Analytics", use_container_width=True):
             st.session_state['current_page'] = 'analytics'
-        if st.button("📤 Data Upload", use_container_width=True):
+        if st.button(" Data Upload", use_container_width=True):
             st.session_state['current_page'] = 'upload'
         st.markdown("---")
         st.markdown("### Quick Stats")
         st.info("System Status: Online")
-        if st.button("🔄 Refresh Data"):
+        if st.button(" Refresh Data"):
             st.cache_data.clear()
             st.rerun()
     
@@ -218,7 +218,7 @@ def main():
     current_page = st.session_state.get('current_page', 'dashboard')
     
     if current_page == 'dashboard' or current_page is None:
-        st.header("📊 Dashboard Overview")
+        st.header(" Dashboard Overview")
         col1, col2, col3, col4 = st.columns(4)
         with col1: st.metric("Total Revenue", format_currency(metrics['total_revenue']))
         with col2: st.metric("Monthly Revenue", format_currency(metrics['monthly_revenue']))
@@ -245,7 +245,7 @@ def main():
             st.subheader("Low Stock Alerts")
             low_stock = inventory[inventory['stock_quantity'] <= inventory['min_stock_level']]
             if len(low_stock) > 0:
-                st.markdown(f'<div class="warning-box">⚠️ {len(low_stock)} items are below minimum stock level!</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="warning-box"> {len(low_stock)} items are below minimum stock level!</div>', unsafe_allow_html=True)
                 st.dataframe(low_stock[['product_id', 'product_name', 'category', 'stock_quantity', 'min_stock_level']], use_container_width=True)
             else:
                 st.success("All items are above minimum stock level!")
@@ -255,7 +255,7 @@ def main():
             with col2: st.plotly_chart(plot_buyer_analysis(buyers), use_container_width=True)
     
     elif current_page == 'inventory':
-        st.header("📦 Inventory Management")
+        st.header(" Inventory Management")
         col1, col2, col3 = st.columns(3)
         with col1: st.metric("Total Products", f"{len(inventory):,}")
         with col2: st.metric("Available", f"{len(inventory[inventory['status'] == 'Available']):,}")
@@ -270,10 +270,10 @@ def main():
         if metal_filter: filtered_inv = filtered_inv[filtered_inv['metal_type'].isin(metal_filter)]
         if status_filter: filtered_inv = filtered_inv[filtered_inv['status'].isin(status_filter)]
         st.dataframe(filtered_inv, use_container_width=True)
-        st.download_button("📥 Download Inventory Data", filtered_inv.to_csv(index=False), "inventory_data.csv", "text/csv")
+        st.download_button(" Download Inventory Data", filtered_inv.to_csv(index=False), "inventory_data.csv", "text/csv")
     
     elif current_page == 'suppliers':
-        st.header("👥 Supplier Management")
+        st.header(" Supplier Management")
         col1, col2, col3 = st.columns(3)
         with col1: st.metric("Total Suppliers", f"{len(suppliers):,}")
         with col2: st.metric("Active Suppliers", f"{len(suppliers[suppliers['status'] == 'Active']):,}")
@@ -281,10 +281,10 @@ def main():
         st.plotly_chart(plot_supplier_performance(suppliers), use_container_width=True)
         st.subheader("All Suppliers")
         st.dataframe(suppliers, use_container_width=True)
-        st.download_button("📥 Download Suppliers Data", suppliers.to_csv(index=False), "suppliers_data.csv", "text/csv")
+        st.download_button(" Download Suppliers Data", suppliers.to_csv(index=False), "suppliers_data.csv", "text/csv")
     
     elif current_page == 'buyers':
-        st.header("🛒 Buyer Management")
+        st.header(" Buyer Management")
         col1, col2, col3 = st.columns(3)
         with col1: st.metric("Total Buyers", f"{len(buyers):,}")
         with col2: st.metric("Active Buyers", f"{len(buyers[buyers['status'] == 'Active']):,}")
@@ -292,10 +292,10 @@ def main():
         st.plotly_chart(plot_buyer_analysis(buyers), use_container_width=True)
         st.subheader("All Buyers")
         st.dataframe(buyers, use_container_width=True)
-        st.download_button("📥 Download Buyers Data", buyers.to_csv(index=False), "buyers_data.csv", "text/csv")
+        st.download_button(" Download Buyers Data", buyers.to_csv(index=False), "buyers_data.csv", "text/csv")
     
     elif current_page == 'sales':
-        st.header("💰 Sales Analytics")
+        st.header(" Sales Analytics")
         col1, col2, col3, col4 = st.columns(4)
         with col1: st.metric("Total Revenue", format_currency(metrics['total_revenue']))
         with col2: st.metric("Total Transactions", f"{metrics['total_orders']:,}")
@@ -314,10 +314,10 @@ def main():
             st.plotly_chart(plot_sales_by_season(sales), use_container_width=True)
         st.subheader("Recent Transactions")
         st.dataframe(sales.tail(20), use_container_width=True)
-        st.download_button("📥 Download Sales Data", sales.to_csv(index=False), "sales_data.csv", "text/csv")
+        st.download_button(" Download Sales Data", sales.to_csv(index=False), "sales_data.csv", "text/csv")
     
     elif current_page == 'analytics':
-        st.header("📈 Advanced Analytics")
+        st.header(" Advanced Analytics")
         tab1, tab2, tab3, tab4 = st.tabs(["Trend Analysis", "Category Performance", "Supplier Analysis", "Inventory Turnover"])
         with tab1:
             if 'transaction_date' in sales.columns:
@@ -357,7 +357,7 @@ def main():
             st.dataframe(inventory_analysis, use_container_width=True)
     
     elif current_page == 'upload':
-        st.header("📤 Data Upload & Management")
+        st.header(" Data Upload & Management")
         tab1, tab2 = st.tabs(["Upload Data", "Data Statistics"])
         with tab1:
             uploaded_file = st.file_uploader("Choose a CSV or Excel file", type=['csv', 'xlsx'])
